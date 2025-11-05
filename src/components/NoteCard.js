@@ -55,7 +55,7 @@ const NoteCard = ({ note, onNoteChange, onDelete, theme }) => {
     <Card
       className={`note-card ${theme}`}
       style={{ marginBottom: '16px' }}
-      bodyStyle={{ padding: '12px 14px' }}
+      bodyStyle={{ padding: '12px 12px 6px 12px' }}
       headStyle={{ padding: 2 }}
       title={
         <Input
@@ -77,7 +77,7 @@ const NoteCard = ({ note, onNoteChange, onDelete, theme }) => {
         style={{ padding: 0 }}
       />
       <Space style={{ width: '100%', justifyContent: 'space-between', marginTop: '4px' }}>
-        <Text type="secondary" style={{ fontSize: 12 }}>
+        <Text style={{ fontSize: 11, fontWeight: 300, opacity: .5 }}>
           Updated {dayjs(note.updated_at).fromNow()}
         </Text>
         {renderSavingStatus()}

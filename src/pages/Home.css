@@ -1,14 +1,13 @@
 .sider-trigger {
     writing-mode: vertical-rl;
     text-orientation: mixed;
-    transform: rotate(180deg);
-    padding: 10px;
     cursor: pointer;
-    background: #001529;
-    color: white;
-    border-radius: 4px 0 0 4px;
+    border-radius: 0 6px 6px 0;
     position: absolute;
-    top: 50%;
-    right: 0; /* collapsedWidth */
-    transform: translateY(-50%) rotate(180deg);
+    bottom: 0;
+    font-size: 11px;
+    height: 55px;
+    left: -28px;
+    border-left: none;
+    transform: translateY(-50%) rotate(-180deg);
 }

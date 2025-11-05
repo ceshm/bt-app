@@ -16,8 +16,8 @@ const AppContent = () => {
       theme={{
         algorithm: currentTheme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
         token: {
-          colorBgContainer: currentTheme === 'dark' ? '#1c1c1c' : '#fff',
-          colorBgLayout: currentTheme === 'dark' ? '#1c1c1c' : '#fff',
+          colorBgContainer: currentTheme === 'dark' ? '#1d1f20' : '#fff',
+          colorBgLayout: currentTheme === 'dark' ? '#1d1f20' : '#fff',
         },
       }}
     >

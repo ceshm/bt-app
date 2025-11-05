@@ -660,7 +660,7 @@ const HomePage = () => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Content style={{ padding: '16px', background: 'transparent' }}>
+      <Content style={{ padding: '18px 24px', background: 'transparent' }}>
         <Space style={{ marginBottom: 16, display: 'flex', justifyContent: 'space-between' }}>
           <Space>
             <Button icon={<LeftOutlined />} onClick={handlePrevDay} />
@@ -713,22 +713,25 @@ const HomePage = () => {
         collapsible
         collapsed={notesPanelCollapsed}
         onCollapse={setNotesPanelCollapsed}
-        width={350}
+        width={340}
         collapsedWidth={0}
         trigger={null}
         style={{
+          position: 'relative',
           height: '100vh',
-          background: theme === 'dark' ? '#1f1f1f' : '#f0f2f5'
+          background: theme === 'dark' ? '#242829' : '#f0f2f5'
         }}
       >
         <NotesPanel />
+        <Button
+          className="sider-trigger"
+          type="default"
+          size="small"
+          onClick={() => setNotesPanelCollapsed(!notesPanelCollapsed)}
+        >
+          Notes
+        </Button>
       </Sider>
-      <Button
-        className="sider-trigger"
-        onClick={() => setNotesPanelCollapsed(!notesPanelCollapsed)}
-      >
-        Notes
-      </Button>
     </Layout>
   );
 };

@@ -1,10 +1,10 @@
 .note-card.dark {
-    background-color: #2d2d2d !important;
+    background-color: #2d3132 !important;
     border-color: #444 !important;
 }
 
 .note-card.dark .ant-card-head {
-    background-color: #333 !important;
+    background-color: #2d3132 !important;
     border-bottom: 1px solid #444 !important;
 }
 
@@ -13,7 +13,7 @@
 }
 
 .note-card.dark .ant-input {
-    background-color: #2d2d2d !important;
+    background-color: #2d3132 !important;
     color: #d8d8d8 !important;
 }
 
