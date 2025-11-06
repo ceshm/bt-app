@@ -660,7 +660,7 @@ const HomePage = () => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Content style={{ padding: '18px 24px', background: 'transparent' }}>
+      <Content style={{ padding: '18px 24px', overflow: 'scroll', maxHeight: '100vh' }}>
         <Space style={{ marginBottom: 16, display: 'flex', justifyContent: 'space-between' }}>
           <Space>
             <Button icon={<LeftOutlined />} onClick={handlePrevDay} />
@@ -676,7 +676,7 @@ const HomePage = () => {
             <Button onClick={handleDiscardChanges} disabled={!isDirty || loading}>Discard Changes</Button>
           </Space>
         </Space>
-        <Space style={{ marginBottom: 16 }}>
+        <Space style={{ marginBottom: 16, opacity: 0.5 }}>
           <Typography.Text>Total Tasks: {pageSummary.nodeCount}</Typography.Text>
           <Typography.Text>Total Estimated: {pageSummary.totalEstimated}m</Typography.Text>
           <Typography.Text>Total Taken: {pageSummary.totalTaken}m</Typography.Text>

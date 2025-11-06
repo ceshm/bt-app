@@ -3,18 +3,18 @@ import { Input, InputNumber, Typography, Space, Dropdown, Menu, Button } from 'a
 import { EllipsisOutlined } from '@ant-design/icons';
 
 const TaskTreeNode = ({
-                        nodeData,
-                        metrics,
-                        onTitleChange,
-                        onTimeChange,
-                        onAddChild,
-                        onAddSibling,
-                        onDeleteNode,
-                        onCopyToNextDay,
-                        onMoveToNextDay,
-                        onCopyToDate,
-                        onMoveToDate
-                      }) => {
+  nodeData,
+  metrics,
+  onTitleChange,
+  onTimeChange,
+  onAddChild,
+  onAddSibling,
+  onDeleteNode,
+  onCopyToNextDay,
+  onMoveToNextDay,
+  onCopyToDate,
+  onMoveToDate
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(nodeData.title);
 
@@ -56,25 +56,27 @@ const TaskTreeNode = ({
   );
 
   return (
-    <div style={{ width: '100%', display: 'flex', gap: '20%' }}>
+    <div style={{ width: '100%', display: 'flex', gap: '10%' }}>
       <div style={{ flex: 1 }}>
         {isEditing ? (
-          <Input
+          <Input.TextArea
             value={title}
             onChange={handleTitleChange}
             onBlur={handleTitleBlur}
-            onPressEnter={handleTitleBlur}
+            // onPressEnter={handleTitleBlur}
             autoFocus
-            style={{ flex: 1, width: '100%', minWidth: 400 }}
+            variant="borderless"
+            style={{ flex: 1, width: '100%', minWidth: 400, padding: '2px 0', lineHeight: 1.5 }}
+            autoSize={{ minRows: 1, maxRows: 24 }}
           />
         ) : (
           <div onClick={handleTitleClick} style={{ cursor: 'pointer', flex: 1 }}>
-            <Typography.Text>{nodeData.title}</Typography.Text>
+            <p style={{ whiteSpace: 'pre-wrap', lineHeight: 1.5, padding: '2px 0', margin: 0 }}>{nodeData.title}</p>
           </div>
         )}
       </div>
 
-      <div style={{ display: 'flex', gap: 8 }}>
+      <div style={{ display: 'flex', gap: 8, placeSelf: 'center' }}>
         {isLeaf ? (
           <>
             <InputNumber
@@ -82,14 +84,18 @@ const TaskTreeNode = ({
               value={nodeData.time_estimated_minutes}
               onChange={(value) => onTimeChange(nodeData.id, 'time_estimated_minutes', value)}
               placeholder="Est"
-              style={{ width: 70 }}
+              step={30}
+              size="small"
+              style={{ width: 70, maxHeight: 25 }}
             />
             <InputNumber
               min={0}
               value={nodeData.time_taken_minutes}
               onChange={(value) => onTimeChange(nodeData.id, 'time_taken_minutes', value)}
               placeholder="Taken"
-              style={{ width: 70 }}
+              step={30}
+              size="small"
+              style={{ width: 70, maxHeight: 25 }}
             />
           </>
         ) : (
