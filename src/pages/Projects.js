@@ -1,5 +1,22 @@
 import React, { useState, useEffect, useMemo, useContext } from 'react';
-import { Select, Button, Tree, Typography, Space, message, Modal, Empty, Layout, Tooltip, Form, Input, DatePicker as AntDatePicker, Tag, Popover } from 'antd';
+import {
+  Select,
+  Button,
+  Tree,
+  Typography,
+  Space,
+  message,
+  Modal,
+  Empty,
+  Layout,
+  Tooltip,
+  Form,
+  Input,
+  DatePicker as AntDatePicker,
+  Tag,
+  Popover,
+  Divider
+} from 'antd';
 import {
   BranchesOutlined,
   PlusOutlined,
@@ -621,26 +638,23 @@ const ProjectsPage = () => {
         <div className="title-bar" style={{ marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Space>
             <Select
-              showSearch
+              variant="borderless"
               value={currentProjectId}
-              style={{ width: 200 }}
               placeholder="Select a project"
+              style={{ minWidth: 155 }}
               onChange={handleProjectChange}
               loading={loading}
               options={projects.map(p => ({ value: p.id, label: p.name }))}
+              popupRender={(menu) => (
+                <>
+                  {menu}
+                  <Divider style={{ margin: '8px 0' }} />
+                  <Button type="link" onClick={() => showProjectModal()}><PlusOutlined /> Create project</Button>
+                </>
+              )}
             />
-            <Tooltip title="Create Project">
-            <Button onClick={() => showProjectModal()}><PlusOutlined style={{ position: 'absolute', right: 8, bottom: 9, fontSize: '8px' }} /><ProjectOutlined style={{ marginRight: 2 }} /></Button>
-            </Tooltip>
           </Space>
           <div className="title-bar-handle" style={{ display: 'flex', flex: 1, marginLeft: 12, alignItems: 'center' }}>
-            {currentProject && <Title level={4} style={{ margin: 0 }}>{currentProject.name}</Title>}
-            {currentProject && (
-              <Space style={{ marginLeft: 12 }}>
-                <Tooltip title="Edit Project Details"><Button size="small" icon={<EditOutlined />} onClick={() => showProjectModal(currentProject)} /></Tooltip>
-                <Tooltip title="Delete Project"><Button size="small" danger icon={<DeleteOutlined />} onClick={handleDeleteProject} /></Tooltip>
-              </Space>
-            )}
           </div>
           <Space>
             <Tooltip title="Add new root task"><Button onClick={handleAddNewTree} type="primary"><PlusOutlined style={{ position: 'absolute', right:10, bottom: 7, fontSize: '8px' }} /><BranchesOutlined /></Button></Tooltip>
@@ -651,7 +665,14 @@ const ProjectsPage = () => {
 
 
         <Space style={{ marginBottom: 16, display: 'flex', justifyContent: 'space-between' }}>
+          <Space>
           {currentProject && projectMetadata}
+          {currentProject && (
+            <Space style={{ marginLeft: 12 }}>
+              <Tooltip title="Edit Project Details"><Button size="small" icon={<EditOutlined />} onClick={() => showProjectModal(currentProject)} /></Tooltip>
+              <Tooltip title="Delete Project"><Button size="small" danger icon={<DeleteOutlined />} onClick={handleDeleteProject} /></Tooltip>
+            </Space>
+          )}</Space>
 
           <Space style={{ opacity: 0.5 }}>
             <Typography.Text>Total Tasks: {pageSummary.nodeCount}</Typography.Text>

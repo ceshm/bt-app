@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useContext } from 'react';
 import { DatePicker, Button, Tree, Typography, Space, message, Modal, Empty, Layout, Tooltip } from 'antd';
 import {
-  BranchesOutlined,
+  BranchesOutlined, DownOutlined,
   LeftOutlined, PlusCircleOutlined,
   PlusOutlined,
   RightOutlined,
@@ -679,11 +679,10 @@ const HomePage = () => {
         <div className="title-bar" style={{ marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Space>
             <Button icon={<LeftOutlined />} onClick={handlePrevDay} />
-            <DatePicker value={selectedDate} onChange={handleDateChange} allowClear={false} />
-            <Button icon={<RightOutlined />} onClick={handleNextDay} />
+            <DatePicker suffixIcon={<DownOutlined />} style={{ minWidth: 190 }} variant="borderless" value={selectedDate} onChange={handleDateChange} allowClear={false} format="dddd MMM D, YYYY" />
+            <Button variant="outlined" icon={<RightOutlined />} onClick={handleNextDay} />
           </Space>
           <div className="title-bar-handle" style={{ display: 'flex', flex: 1, marginLeft: 12 }}>
-            <Title level={4} style={{ margin: 0 }}>{selectedDate.format('dddd, MMMM D')}</Title>
           </div>
           <Space>
             <Tooltip title={<>Add new tree <Text keyboard>⌘ A</Text></>}>
