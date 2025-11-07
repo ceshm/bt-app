@@ -1,6 +1,13 @@
 import React, { useState, useEffect, useMemo, useContext } from 'react';
-import { DatePicker, Button, Tree, Typography, Space, message, Modal, Empty, Layout } from 'antd';
-import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { DatePicker, Button, Tree, Typography, Space, message, Modal, Empty, Layout, Tooltip } from 'antd';
+import {
+  BranchesOutlined,
+  LeftOutlined,
+  PlusOutlined,
+  RightOutlined,
+  RollbackOutlined,
+  SaveOutlined
+} from '@ant-design/icons';
 import dayjs from 'dayjs';
 import { supabase } from '../lib/supabaseClient';
 import { v4 as uuidv4 } from 'uuid';
@@ -127,23 +134,6 @@ const HomePage = () => {
     setLoading(false);
   };
 
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if ((event.metaKey || event.ctrlKey) && event.key === 's') {
-        event.preventDefault();
-        if (isDirty) {
-          handleSave();
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isDirty, handleSave]);
-
   const handleDiscardChanges = () => {
     if (window.confirm('Are you sure you want to discard all changes?')) {
       setTreeData(JSON.parse(JSON.stringify(originalTreeData)));
@@ -165,6 +155,31 @@ const HomePage = () => {
     setTreeData([...treeData, newRootNode]);
     setIsDirty(true);
   };
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === 's') {
+        event.preventDefault();
+        if (isDirty) {
+          handleSave();
+        }
+      } else if ((event.metaKey || event.ctrlKey) && event.key === 'a') {
+        event.preventDefault();
+        handleAddNewTree();
+      } else if ((event.metaKey || event.ctrlKey) && event.key === 'z') {
+        event.preventDefault();
+        if (isDirty) {
+          handleDiscardChanges();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isDirty, handleSave, handleAddNewTree, handleDiscardChanges]);
 
   const handleDrop = (info) => {
     const dropKey = info.node.key;
@@ -671,11 +686,16 @@ const HomePage = () => {
             <Title level={4} style={{ margin: 0 }}>{selectedDate.format('dddd, MMMM D')}</Title>
           </div>
           <Space>
-            <Button onClick={handleAddNewTree} type="primary">Add New Tree</Button>
-            <Button onClick={handleSave} disabled={!isDirty || loading} loading={loading}>
-              Save <Text keyboard>⌘ S</Text>
+            <Tooltip title={<>Add new tree <Text keyboard>⌘ A</Text></>}>
+            <Button onClick={handleAddNewTree} type="primary"><PlusOutlined style={{ position: 'absolute', left: 12, fontSize: '10px' }} /><BranchesOutlined style={{ marginLeft: 8 }} /></Button>
+            </Tooltip>
+            <Tooltip title={<>Save <Text keyboard>⌘ S</Text></>}><Button onClick={handleSave} disabled={!isDirty || loading} loading={loading}>
+              <SaveOutlined />
             </Button>
-            <Button onClick={handleDiscardChanges} disabled={!isDirty || loading}>Discard Changes</Button>
+            </Tooltip>
+            <Tooltip title={<>Rollback changes <Text keyboard>⌘ Z</Text></>}>
+            <Button onClick={handleDiscardChanges} disabled={!isDirty || loading}><RollbackOutlined /></Button>
+            </Tooltip>
           </Space>
         </div>
         <Space style={{ marginBottom: 16, opacity: 0.5 }}>

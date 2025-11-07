@@ -43,20 +43,44 @@ const TaskTreeNode = ({
 
   const menu = (
     <Menu>
-      <Menu.Item key="1" onClick={() => onAddChild(nodeData.id)}>Add child</Menu.Item>
+      <Menu.Item key="1" onClick={() => onAddChild(nodeData.id)}>Add child <Typography.Text keyboard>a</Typography.Text></Menu.Item>
       <Menu.Item key="2" onClick={() => onAddSibling(nodeData.id)}>Add sibling</Menu.Item>
       <Menu.Divider />
-      <Menu.Item key="4" onClick={() => onCopyToNextDay(nodeData.id)}>Copy to next day</Menu.Item>
+      <Menu.Item key="4" onClick={() => onCopyToNextDay(nodeData.id)}>Copy to next day <Typography.Text keyboard>c</Typography.Text></Menu.Item>
       <Menu.Item key="5" onClick={() => onMoveToNextDay(nodeData.id)}>Move to next day</Menu.Item>
       <Menu.Item key="6" onClick={() => onCopyToDate(nodeData.id)}>Copy to date...</Menu.Item>
       <Menu.Item key="7" onClick={() => onMoveToDate(nodeData.id)}>Move to date...</Menu.Item>
       <Menu.Divider />
-      <Menu.Item key="3" danger onClick={() => onDeleteNode(nodeData.id)}>Delete</Menu.Item>
+      <Menu.Item key="3" danger onClick={() => onDeleteNode(nodeData.id)}>Delete <Typography.Text keyboard>del</Typography.Text></Menu.Item>
     </Menu>
   );
 
+  const handleKeyDown = (event) => {
+    if (isEditing) {
+      return;
+    }
+
+    switch (event.key) {
+      case 'Delete':
+      case 'Backspace':
+        event.preventDefault();
+        onDeleteNode(nodeData.id);
+        break;
+      case 'a':
+        event.preventDefault();
+        onAddChild(nodeData.id);
+        break;
+      case 'c':
+        event.preventDefault();
+        onCopyToNextDay(nodeData.id);
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
-    <div style={{ width: '100%', display: 'flex', gap: '10%' }}>
+    <div onKeyDown={handleKeyDown} style={{ width: '100%', display: 'flex', gap: '10%' }}>
       <div style={{ flex: 1 }}>
         {isEditing ? (
           <Input.TextArea
