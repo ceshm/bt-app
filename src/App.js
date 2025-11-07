@@ -4,7 +4,7 @@ import { ConfigProvider, theme } from 'antd';
 import { ThemeProvider, ThemeContext } from './context/ThemeContext';
 import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
-import Statistics from './pages/Statistics';
+import Projects from './pages/Projects';
 import Configuration from './pages/Configuration';
 import './App.css';
 
@@ -25,7 +25,7 @@ const AppContent = () => {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
-            <Route path="statistics" element={<Statistics />} />
+            <Route path="projects" element={<Projects />} />
             <Route path="configuration" element={<Configuration />} />
           </Route>
         </Routes>

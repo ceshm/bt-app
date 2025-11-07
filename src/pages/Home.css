@@ -34,6 +34,10 @@
 
     .title-bar-handle {
         -webkit-app-region: drag;
+
+        button {
+            -webkit-app-region: none;
+        }
     }
 
     .content {
@@ -52,6 +56,5 @@
     .profile-section {
         margin-top: 40px;
     }
-
 
 }

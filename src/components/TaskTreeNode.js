@@ -13,7 +13,8 @@ const TaskTreeNode = ({
   onCopyToNextDay,
   onMoveToNextDay,
   onCopyToDate,
-  onMoveToDate
+  onMoveToDate,
+  onCopyToToday
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(nodeData.title);
@@ -41,19 +42,34 @@ const TaskTreeNode = ({
 
   const isLeaf = metrics?.isLeaf;
 
-  const menu = (
-    <Menu>
-      <Menu.Item key="1" onClick={() => onAddChild(nodeData.id)}>Add child <Typography.Text keyboard>a</Typography.Text></Menu.Item>
-      <Menu.Item key="2" onClick={() => onAddSibling(nodeData.id)}>Add sibling</Menu.Item>
-      <Menu.Divider />
-      <Menu.Item key="4" onClick={() => onCopyToNextDay(nodeData.id)}>Copy to next day <Typography.Text keyboard>c</Typography.Text></Menu.Item>
-      <Menu.Item key="5" onClick={() => onMoveToNextDay(nodeData.id)}>Move to next day</Menu.Item>
-      <Menu.Item key="6" onClick={() => onCopyToDate(nodeData.id)}>Copy to date...</Menu.Item>
-      <Menu.Item key="7" onClick={() => onMoveToDate(nodeData.id)}>Move to date...</Menu.Item>
-      <Menu.Divider />
-      <Menu.Item key="3" danger onClick={() => onDeleteNode(nodeData.id)}>Delete <Typography.Text keyboard>del</Typography.Text></Menu.Item>
-    </Menu>
-  );
+  const menuItems = [
+    { key: 'add_child', label: 'Add child', onClick: () => onAddChild(nodeData.id) },
+    { key: 'add_sibling', label: 'Add sibling', onClick: () => onAddSibling(nodeData.id) },
+    { type: 'divider' },
+  ];
+
+  if (onCopyToToday) {
+    menuItems.push({ key: 'copy_today', label: 'Copy to Today', onClick: () => onCopyToToday(nodeData.id) });
+  }
+  if (onCopyToDate) {
+    menuItems.push({ key: 'copy_date', label: 'Copy to Date...', onClick: () => onCopyToDate(nodeData.id) });
+  }
+
+  // For Home page
+  if (onCopyToNextDay) {
+    menuItems.push({ key: 'copy_next_day', label: 'Copy to next day', onClick: () => onCopyToNextDay(nodeData.id) });
+  }
+  if (onMoveToNextDay) {
+    menuItems.push({ key: 'move_next_day', label: 'Move to next day', onClick: () => onMoveToNextDay(nodeData.id) });
+  }
+  if (onMoveToDate) {
+    menuItems.push({ key: 'move_date', label: 'Move to date...', onClick: () => onMoveToDate(nodeData.id) });
+  }
+
+  menuItems.push({ type: 'divider' });
+  menuItems.push({ key: 'delete', label: 'Delete', danger: true, onClick: () => onDeleteNode(nodeData.id) });
+
+  const menu = <Menu items={menuItems} />;
 
   const handleKeyDown = (event) => {
     if (isEditing) {

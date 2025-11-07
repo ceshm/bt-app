@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import {
   HomeOutlined,
-  BarChartOutlined,
   SettingOutlined,
-  UserOutlined,
+  UserOutlined, ProjectOutlined,
 } from '@ant-design/icons';
 import { Layout, Menu, theme, Avatar } from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
@@ -41,9 +40,9 @@ const MainLayout = () => {
               label: 'Home',
             },
             {
-              key: '/statistics',
-              icon: <BarChartOutlined />,
-              label: 'Statistics',
+              key: '/projects',
+              icon: <ProjectOutlined />,
+              label: 'Projects',
             },
             {
               key: '/configuration',
@@ -53,7 +52,7 @@ const MainLayout = () => {
           ]}
         />
       </Sider>
-      <Layout style={{ background: 'red' }}>
+      <Layout>
         <Content
           style={{
             padding: 0,

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useContext } from 'react';
 import { DatePicker, Button, Tree, Typography, Space, message, Modal, Empty, Layout, Tooltip } from 'antd';
 import {
   BranchesOutlined,
-  LeftOutlined,
+  LeftOutlined, PlusCircleOutlined,
   PlusOutlined,
   RightOutlined,
   RollbackOutlined,
@@ -682,12 +682,12 @@ const HomePage = () => {
             <DatePicker value={selectedDate} onChange={handleDateChange} allowClear={false} />
             <Button icon={<RightOutlined />} onClick={handleNextDay} />
           </Space>
-          <div className="title-bar-handle" style={{ display: 'flex', flex: 1, marginLeft: 8 }}>
+          <div className="title-bar-handle" style={{ display: 'flex', flex: 1, marginLeft: 12 }}>
             <Title level={4} style={{ margin: 0 }}>{selectedDate.format('dddd, MMMM D')}</Title>
           </div>
           <Space>
             <Tooltip title={<>Add new tree <Text keyboard>⌘ A</Text></>}>
-            <Button onClick={handleAddNewTree} type="primary"><PlusOutlined style={{ position: 'absolute', left: 12, fontSize: '10px' }} /><BranchesOutlined style={{ marginLeft: 8 }} /></Button>
+            <Button onClick={handleAddNewTree} type="primary"><PlusOutlined style={{ position: 'absolute', right:10, bottom: 7, fontSize: '8px' }} /><BranchesOutlined /></Button>
             </Tooltip>
             <Tooltip title={<>Save <Text keyboard>⌘ S</Text></>}><Button onClick={handleSave} disabled={!isDirty || loading} loading={loading}>
               <SaveOutlined />
