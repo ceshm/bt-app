@@ -11,3 +11,47 @@
     border-left: none;
     transform: translateY(-50%) rotate(-180deg);
 }
+
+.title-bar {
+
+}
+
+.content {
+    max-height: 100vh;
+}
+
+/* Styles when in standalone display mode */
+@media (display-mode: window-controls-overlay) {
+    .title-bar {
+        position: fixed;
+        background: rgb(0, 33, 64);
+        top: 0;
+        left: 0;
+        padding: 4px 125px 4px env(titlebar-area-x);
+        width: 100%;
+        z-index: 10;
+    }
+
+    .title-bar-handle {
+        -webkit-app-region: drag;
+    }
+
+    .content {
+        height: calc(100vh - 40px);
+    }
+
+    .layout-cont {
+        poistion: relative;
+        padding-top: 40px;
+    }
+
+    .ant-layout-sider {
+        max-height: calc(100vh - 40px);
+    }
+
+    .profile-section {
+        margin-top: 40px;
+    }
+
+
+}

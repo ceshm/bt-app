@@ -21,7 +21,7 @@ const MainLayout = () => {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        <div style={{ padding: '24px 0', textAlign: 'center' }}>
+        <div className="profile-section" style={{ padding: '24px 0', textAlign: 'center' }}>
           <Avatar size={collapsed ? 40 : 64} icon={<UserOutlined />} />
           {!collapsed && (
             <div style={{ marginTop: '16px' }}>

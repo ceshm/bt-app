@@ -659,15 +659,17 @@ const HomePage = () => {
   }, [treeData, computedMetrics]);
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Content style={{ padding: '18px 24px', overflow: 'scroll', maxHeight: '100vh' }}>
-        <Space style={{ marginBottom: 16, display: 'flex', justifyContent: 'space-between' }}>
+    <Layout className="layout-cont" style={{ minHeight: '100vh' }}>
+      <Content className="content" style={{ padding: '18px 24px', overflow: 'scroll' }}>
+        <div className="title-bar" style={{ marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Space>
             <Button icon={<LeftOutlined />} onClick={handlePrevDay} />
             <DatePicker value={selectedDate} onChange={handleDateChange} allowClear={false} />
             <Button icon={<RightOutlined />} onClick={handleNextDay} />
-            <Title level={4} style={{ margin: 0 }}>{selectedDate.format('dddd, MMMM D')}</Title>
           </Space>
+          <div className="title-bar-handle" style={{ display: 'flex', flex: 1, marginLeft: 8 }}>
+            <Title level={4} style={{ margin: 0 }}>{selectedDate.format('dddd, MMMM D')}</Title>
+          </div>
           <Space>
             <Button onClick={handleAddNewTree} type="primary">Add New Tree</Button>
             <Button onClick={handleSave} disabled={!isDirty || loading} loading={loading}>
@@ -675,7 +677,7 @@ const HomePage = () => {
             </Button>
             <Button onClick={handleDiscardChanges} disabled={!isDirty || loading}>Discard Changes</Button>
           </Space>
-        </Space>
+        </div>
         <Space style={{ marginBottom: 16, opacity: 0.5 }}>
           <Typography.Text>Total Tasks: {pageSummary.nodeCount}</Typography.Text>
           <Typography.Text>Total Estimated: {pageSummary.totalEstimated}m</Typography.Text>
